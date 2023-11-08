@@ -12,5 +12,19 @@ public class health1 : MonoBehaviour
         CurrentHealth = maxHealth;
     }
 
+    void TakeDamage(int amount)
+
+    {
+        CurrentHealth -= amount;
+
+        if (CurrentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+
+        }
+
+
+    }
+
     // Update is called once per frame
 }
