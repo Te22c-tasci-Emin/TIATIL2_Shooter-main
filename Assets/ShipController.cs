@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class ShipController : MonoBehaviour
@@ -21,11 +23,33 @@ public class ShipController : MonoBehaviour
   [SerializeField]
   GameObject Enemycombatent;
 
-  
+  float timeBetweenPowerup = 80f;
+  float timeSinceLastPowerup = 20;
+  bool isPoweredUp = true;
+
+
 
   // Update is called once per frame
   void Update()
   {
+
+    // Om vi just nu har powerup (boolen är true): dra av från timern
+    // Om timern < 0: sätt boolen till false
+    if (isPoweredUp == true)
+    {
+      timeSinceLastPowerup -= Time.deltaTime;
+    }
+
+    if (timeSinceLastPowerup < 0)
+
+    {
+      isPoweredUp = false;
+
+    }
+
+
+
+
 
     float moveX = Input.GetAxisRaw("Horizontal");
     float moveY = Input.GetAxisRaw("Vertical");
@@ -48,13 +72,34 @@ public class ShipController : MonoBehaviour
     }
 
     timeSinceLastShot += Time.deltaTime;
-    if (Input.GetAxisRaw("Fire1")> 0 && timeSinceLastShot > timeBetweenShots)
+    if (Input.GetAxisRaw("Fire1") > 0 && timeSinceLastShot > timeBetweenShots)
     {
       timeSinceLastShot = 0;
+      // Om boolen är true, skjut det bättre skottet
+      // Annars skjut det vanliga
       Instantiate(boltPrefab, gun.transform.position, Quaternion.identity);
     }
   }
- }
+
+  public void powerup()
+  {
+
+    // sätt boolen till true
+    // sätt timern till 5
+
+    timeSinceLastPowerup -= Time.deltaTime;
+
+    if (timeSinceLastPowerup > timeBetweenPowerup)
+    {
+      timeSinceLastPowerup = 80;
+    }
+
+    if (timeSinceLastPowerup > timeBetweenPowerup)
+    {
+
+    }
+  }
+}
 /*
 - Skjuta skott
 - Fiender
@@ -62,3 +107,4 @@ public class ShipController : MonoBehaviour
 - Score
 - Startmeny
 */
+//yuh
