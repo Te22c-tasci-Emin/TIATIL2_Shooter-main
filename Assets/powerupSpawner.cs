@@ -7,16 +7,18 @@ public class powerupSpawner : MonoBehaviour
     [SerializeField]
 
     GameObject spawner;
-    float timeBetweenEnemies = 0.5f;
-    float timeSinceLastEnemies = 0;
+
+    [SerializeField]
+    float timeBetweenPowerups = 8f;
+    float timeSinceLastPowerup = 0;
     void Update()
     {
-        timeSinceLastEnemies += Time.deltaTime;
+        timeSinceLastPowerup += Time.deltaTime;
 
-        if (timeSinceLastEnemies > timeBetweenEnemies)
+        if (timeSinceLastPowerup > timeBetweenPowerups)
         {
             Instantiate(spawner);
-            timeSinceLastEnemies = 0;
+            timeSinceLastPowerup = 0;
         }
     }
 }

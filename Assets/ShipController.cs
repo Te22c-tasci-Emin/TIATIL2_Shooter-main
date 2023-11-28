@@ -41,7 +41,6 @@ public class ShipController : MonoBehaviour
     }
 
     if (timeSinceLastPowerup < 0)
-
     {
       isPoweredUp = false;
 
