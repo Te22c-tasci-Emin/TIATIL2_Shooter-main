@@ -23,8 +23,8 @@ public class ShipController : MonoBehaviour
   [SerializeField]
   GameObject Enemycombatent;
 
-  float timeBetweenPowerup = 80f;
-  float timeSinceLastPowerup = 20;
+  // float timeBetweenPowerup = 80f;
+  float timeSinceLastPowerup = 0;
   bool isPoweredUp = true;
 
 
@@ -38,7 +38,14 @@ public class ShipController : MonoBehaviour
     if (isPoweredUp == true)
     {
       timeSinceLastPowerup -= Time.deltaTime;
+      timeBetweenShots = 0.25f;
     }
+
+else 
+{
+
+  
+}
 
     if (timeSinceLastPowerup < 0)
     {
@@ -80,23 +87,14 @@ public class ShipController : MonoBehaviour
     }
   }
 
-  public void powerup()
+  public void Powerup()
   {
 
-    // sätt boolen till true
+    isPoweredUp = true; 
+    timeSinceLastPowerup = 4f;
+    
     // sätt timern till 5
 
-    timeSinceLastPowerup -= Time.deltaTime;
-
-    if (timeSinceLastPowerup > timeBetweenPowerup)
-    {
-      timeSinceLastPowerup = 80;
-    }
-
-    if (timeSinceLastPowerup > timeBetweenPowerup)
-    {
-
-    }
   }
 }
 /*

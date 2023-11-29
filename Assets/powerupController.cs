@@ -10,7 +10,7 @@ public class powerupController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-          float x = Random.Range(-7f, 7f);
+        float x = Random.Range(-7f, 7f);
 
         Vector2 position = new Vector2(x, 5.5f);
 
@@ -20,7 +20,7 @@ public class powerupController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
 
         float speed = 2.5f;
 
@@ -30,15 +30,16 @@ public class powerupController : MonoBehaviour
         if (transform.position.y < -3.5f)
         {
             Destroy(this.gameObject);
-        }   
+        }
     }
 
 
-     void OnTriggerEnter2D(Collider2D other)
-     {
-      if (other.gameObject.tag =="dmgpowerup")
-{
-
-}
-     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Destroy(this.gameObject);
+            other.gameObject.GetComponent<ShipController>().Powerup();
+        }
+    }
 }
