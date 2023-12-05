@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
@@ -27,7 +28,8 @@ public class ShipController : MonoBehaviour
   float timeSinceLastPowerup = 0;
   bool isPoweredUp = true;
 
-
+  [SerializeField]
+  GameObject ExplosionPrefab;
 
   // Update is called once per frame
   void Update()
@@ -41,11 +43,12 @@ public class ShipController : MonoBehaviour
       timeBetweenShots = 0.25f;
     }
 
-else 
-{
 
-  
-}
+    else
+    {
+
+
+    }
 
     if (timeSinceLastPowerup < 0)
     {
@@ -87,16 +90,32 @@ else
     }
   }
 
+
+
   public void Powerup()
   {
 
-    isPoweredUp = true; 
+    isPoweredUp = true;
     timeSinceLastPowerup = 4f;
-    
+
     // sätt timern till 5
 
   }
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.tag == "enemy")
+    {
+      Instantiate(ExplosionPrefab,transform.position,Quaternion.identity);
+      Destroy(this.gameObject);
+
+      SceneManager.LoadScene(1);
+
+    }
+
+  }
 }
+
+
 /*
 - Skjuta skott
 - Fiender
